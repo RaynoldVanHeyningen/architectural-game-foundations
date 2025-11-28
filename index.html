@@ -1,0 +1,1203 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="01-chapter-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Architectural Foundations: Building Modular & Moddable AAA Game Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="sky" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#architectural-foundations-building-modular-moddable-aaa-game-projects" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects" class="md-header__button md-logo" aria-label="Architectural Foundations: Building Modular & Moddable AAA Game Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Architectural Foundations: Building Modular & Moddable AAA Game Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects" class="md-nav__button md-logo" aria-label="Architectural Foundations: Building Modular & Moddable AAA Game Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Architectural Foundations: Building Modular & Moddable AAA Game Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#course-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Course Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Table of Contents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#part-1-the-core-philosophy-why-foundations-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1: The Core Philosophy - Why Foundations Matter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2-establishing-the-project-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2: Establishing the Project Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-3-implementing-core-architectural-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3: Implementing Core Architectural Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-4-resource-management-moddability-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4: Resource Management &amp; Moddability Hooks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-5-quality-assurance-project-readiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 5: Quality Assurance &amp; Project Readiness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="01-chapter-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="02-chapter-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="03-chapter-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="04-chapter-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="05-chapter-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="06-chapter-6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="07-chapter-7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="08-chapter-8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="09-chapter-9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 9
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="10-chapter-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 10
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="11-chapter-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 11
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="12-chapter-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 12
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="13-chapter-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 13
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="14-chapter-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 14
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="15-chapter-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 15
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="16-chapter-16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 16
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="17-chapter-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 17
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="18-chapter-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 18
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="19-chapter-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 19
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="20-chapter-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#course-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Course Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Table of Contents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#part-1-the-core-philosophy-why-foundations-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 1: The Core Philosophy - Why Foundations Matter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-2-establishing-the-project-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 2: Establishing the Project Framework
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-3-implementing-core-architectural-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 3: Implementing Core Architectural Patterns
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-4-resource-management-moddability-hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 4: Resource Management &amp; Moddability Hooks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#part-5-quality-assurance-project-readiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Part 5: Quality Assurance &amp; Project Readiness
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="architectural-foundations-building-modular-moddable-aaa-game-projects">Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects</h1>
+<h2 id="course-overview">Course Overview</h2>
+<p>Welcome to "Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects." This course is designed to equip aspiring and professional game developers with the essential knowledge and practices for setting up robust, scalable, and maintainable game projects from the ground up. In the fast-paced world of AAA game development, a solid architectural foundation is not just a best practice—it's a necessity for success, enabling large teams, long development cycles, and future-proofing your game for expansions and community-driven content.</p>
+<p>We will focus on a <strong>composition-first design philosophy</strong>, emphasizing modularity and clear separation of concerns to avoid the pitfalls of monolithic systems. A key aspect of this course is <strong>designing for moddability</strong> from day one, understanding how to structure your project so that it can be extended and customized by players and content creators.</p>
+<p>By the end of this course, you will understand the "why" behind modern game architecture, be able to establish a clean and efficient project structure, design core game systems using production-grade patterns, and lay the groundwork for a game that is ready for both professional teams and an engaged modding community. We will explore these concepts using clear explanations and <strong>pseudocode examples</strong>, ensuring the architectural principles are universally applicable regardless of your chosen game engine.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<h3 id="part-1-the-core-philosophy-why-foundations-matter">Part 1: The Core Philosophy - Why Foundations Matter</h3>
+<ul>
+<li><strong>Chapter 1: Introduction to AAA Project Foundations</strong><ul>
+<li>Goal: Understand the critical importance of strong architectural foundations in professional game development.</li>
+<li>Concepts: Scalability, Maintainability, Team Collaboration, Long-Term Vision.</li>
+</ul>
+</li>
+<li><strong>Chapter 2: Understanding Modularity: The Building Block Principle</strong><ul>
+<li>Goal: Define modularity and its benefits in game systems design.</li>
+<li>Concepts: Loose Coupling, Cohesion, Single Responsibility Principle.</li>
+</ul>
+</li>
+<li><strong>Chapter 3: Embracing Composition: Beyond Inheritance</strong><ul>
+<li>Goal: Grasp the power of composition over inheritance for flexible and extensible game objects.</li>
+<li>Concepts: "Has-a" vs. "Is-a" relationships, Component-Based Design (conceptual introduction).</li>
+</ul>
+</li>
+<li><strong>Chapter 4: Designing for Moddability: Future-Proofing Your Game</strong><ul>
+<li>Goal: Learn why and how to plan for moddability from the initial stages of project setup.</li>
+<li>Concepts: Data-driven design, separation of concerns for player content, extensibility.</li>
+</ul>
+</li>
+<li><strong>Chapter 5: The Production Mindset: Efficiency &amp; Quality</strong><ul>
+<li>Goal: Adopt a professional development mindset focused on efficiency, quality, and technical debt prevention.</li>
+<li>Concepts: Code standards, documentation, version control (conceptual), continuous integration (conceptual).</li>
+</ul>
+</li>
+</ul>
+<h3 id="part-2-establishing-the-project-framework">Part 2: Establishing the Project Framework</h3>
+<ul>
+<li><strong>Chapter 6: Setting Up Your Project Structure: A Clean Slate</strong><ul>
+<li>Goal: Establish a logical and maintainable folder and file organization for a new game project.</li>
+<li>Concepts: Core directories (Source, Assets, Config, Tools, Docs), naming conventions.</li>
+</ul>
+</li>
+<li><strong>Chapter 7: Defining Core Systems: The Nervous System of Your Game</strong><ul>
+<li>Goal: Identify and abstract the fundamental systems required in most games.</li>
+<li>Concepts: Input, Game State, Event Management, Resource Management, UI Management (high-level definitions).</li>
+</ul>
+</li>
+<li><strong>Chapter 8: The Game Loop Foundation: Orchestrating Play</strong><ul>
+<li>Goal: Understand the fundamental structure of a game loop and how to design it for modularity.</li>
+<li>Concepts: Initialization, Update, Render, Shutdown phases, dependency order.</li>
+</ul>
+</li>
+<li><strong>Chapter 9: Configuration Management: Data-Driven Design Principles</strong><ul>
+<li>Goal: Learn to separate configuration data from code for flexibility and moddability.</li>
+<li>Concepts: External data files (JSON, XML, YAML), data schemas, loading mechanisms.</li>
+</ul>
+</li>
+</ul>
+<h3 id="part-3-implementing-core-architectural-patterns">Part 3: Implementing Core Architectural Patterns</h3>
+<ul>
+<li><strong>Chapter 10: Building with Components: The Entity-Component-System (ECS) Paradigm</strong><ul>
+<li>Goal: Implement a basic component-based system to manage game object behavior.</li>
+<li>Concepts: Entities, Components, Systems, data-oriented design (conceptual).</li>
+</ul>
+</li>
+<li><strong>Chapter 11: The Event Bus: Decoupling Game Systems</strong><ul>
+<li>Goal: Design and implement a robust event system to facilitate communication between disparate game systems.</li>
+<li>Concepts: Publishers, Subscribers, Event types, asynchronous communication.</li>
+</ul>
+</li>
+<li><strong>Chapter 12: Service Locators &amp; Dependency Injection: Managing System Access</strong><ul>
+<li>Goal: Understand patterns for providing access to core game services without tight coupling.</li>
+<li>Concepts: Service Locator pattern, Dependency Injection (conceptual introduction), inversion of control.</li>
+</ul>
+</li>
+<li><strong>Chapter 13: State Management: Designing Robust Game States</strong><ul>
+<li>Goal: Implement a state machine pattern for managing the overall flow and different states of the game.</li>
+<li>Concepts: Game states (Main Menu, Gameplay, Pause), state transitions, state stack.</li>
+</ul>
+</li>
+</ul>
+<h3 id="part-4-resource-management-moddability-hooks">Part 4: Resource Management &amp; Moddability Hooks</h3>
+<ul>
+<li><strong>Chapter 14: Abstracting Resource Loading: Managing Assets Modularity</strong><ul>
+<li>Goal: Design a system for loading and unloading game assets in a modular and efficient manner.</li>
+<li>Concepts: Resource handles, asynchronous loading, asset bundling (conceptual).</li>
+</ul>
+</li>
+<li><strong>Chapter 15: Data Serialization &amp; Deserialization: Storing and Loading Game Data</strong><ul>
+<li>Goal: Implement mechanisms for saving and loading game data, including player progress and game configurations.</li>
+<li>Concepts: Serialization formats, data persistence, versioning saved data.</li>
+</ul>
+</li>
+<li><strong>Chapter 16: Modding Entry Points: Designing for External Content</strong><ul>
+<li>Goal: Architect specific points in your game where external content (mods) can be injected.</li>
+<li>Concepts: Content directories, manifest files, asset overrides, data merging.</li>
+</ul>
+</li>
+<li><strong>Chapter 17: Scripting Interfaces (Conceptual): Empowering Modders</strong><ul>
+<li>Goal: Explore conceptual approaches to providing modders with scripting capabilities without engine-specific implementations.</li>
+<li>Concepts: API exposure, sandboxing, custom scripting languages (high-level discussion).</li>
+</ul>
+</li>
+</ul>
+<h3 id="part-5-quality-assurance-project-readiness">Part 5: Quality Assurance &amp; Project Readiness</h3>
+<ul>
+<li><strong>Chapter 18: Foundations of Logging &amp; Debugging: Seeing Inside Your Game</strong><ul>
+<li>Goal: Implement a robust logging system for debugging and runtime analysis.</li>
+<li>Concepts: Log levels, log categories, error handling, assertion checks.</li>
+</ul>
+</li>
+<li><strong>Chapter 19: Unit Testing &amp; Integration Testing Basics: Ensuring Correctness</strong><ul>
+<li>Goal: Introduce the principles of automated testing for core game logic and systems.</li>
+<li>Concepts: Unit tests, integration tests, test-driven development (conceptual).</li>
+</ul>
+</li>
+<li><strong>Chapter 20: Build &amp; Deployment Considerations: Preparing for Release</strong><ul>
+<li>Goal: Understand the final steps in preparing a project for various deployment targets.</li>
+<li>Concepts: Build configurations, platform-specific settings, packaging, patching (conceptual).</li>
+</ul>
+</li>
+<li><strong>Chapter 21: Course Conclusion: Your Project Foundation Checklist</strong><ul>
+<li>Goal: Review the key architectural principles and provide a checklist for starting new projects on a solid foundation.</li>
+<li>Concepts: Recap of modularity, composition, moddability, and production readiness.</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1490 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../15-chapter-15/">
+      
+      
+        <link rel="next" href="../17-chapter-17/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Chapter 16 - Architectural Foundations: Building Modular & Moddable AAA Game Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="sky" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-16-modding-entry-points-designing-for-external-content" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects" class="md-header__button md-logo" aria-label="Architectural Foundations: Building Modular & Moddable AAA Game Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Architectural Foundations: Building Modular & Moddable AAA Game Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 16
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects" class="md-nav__button md-logo" aria-label="Architectural Foundations: Building Modular & Moddable AAA Game Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Architectural Foundations: Building Modular & Moddable AAA Game Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-chapter-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-chapter-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-chapter-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-chapter-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-chapter-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-chapter-6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-chapter-7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-chapter-8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-chapter-9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 9
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-chapter-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 10
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-chapter-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 11
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-chapter-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 12
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-chapter-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 13
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-chapter-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 14
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-chapter-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 15
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 16
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 16
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-16-modding-entry-points-designing-for-external-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 16: Modding Entry Points: Designing for External Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapter 16: Modding Entry Points: Designing for External Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-explanation-what-are-modding-entry-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concept Explanation: What are Modding Entry Points?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-reasoning-the-open-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Reasoning: The Open Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-mindset-notes-official-support-and-community-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Mindset Notes: Official Support and Community Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-instructions-implementing-key-modding-entry-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Instructions: Implementing Key Modding Entry Points
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpoint &amp; Exercise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-chapter-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 17
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-chapter-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 18
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-chapter-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 19
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-chapter-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-16-modding-entry-points-designing-for-external-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 16: Modding Entry Points: Designing for External Content
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapter 16: Modding Entry Points: Designing for External Content">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-explanation-what-are-modding-entry-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concept Explanation: What are Modding Entry Points?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-reasoning-the-open-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Reasoning: The Open Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-mindset-notes-official-support-and-community-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Mindset Notes: Official Support and Community Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-instructions-implementing-key-modding-entry-points" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Instructions: Implementing Key Modding Entry Points
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpoint &amp; Exercise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Chapter 16</h1>
+
+<h2 id="chapter-16-modding-entry-points-designing-for-external-content">Chapter 16: Modding Entry Points: Designing for External Content</h2>
+<h3 id="goal">Goal</h3>
+<p>The goal of this chapter is to explicitly design and implement various <strong>modding entry points</strong> within your game's architecture. You will learn to create specific "hooks" where external content (mods) can be injected, allowing modders to seamlessly add new assets, configuration data, and even custom behaviors without altering the core game.</p>
+<h3 id="concept-explanation-what-are-modding-entry-points">Concept Explanation: What are Modding Entry Points?</h3>
+<p>Modding entry points are deliberately designed interfaces, directories, or code segments in your game that allow external code or data to interact with or extend the game. They are the "doors" you open for modders to integrate their content. Without explicit entry points, modding often relies on "hacky" methods like memory injection or reverse-engineering, which are fragile and prone to breaking with every game update.</p>
+<p>By providing clear, stable entry points, you empower the modding community and future-proof their creations against your game's evolving codebase.</p>
+<p>Key types of modding entry points include:</p>
+<ol>
+<li><strong>Content Directories &amp; Overrides</strong>: Designating specific folders where modded assets (models, textures, audio) and configuration files (JSON, XML) can be placed to override or add to the game's default content. (We laid the groundwork for this with our <code>ResourceSystem</code> in Chapter 14 and <code>ConfigManager</code> in Chapter 9).</li>
+<li><strong>Manifest Files</strong>: Structured data files (e.g., JSON) within mod folders that describe the mod's contents, dependencies, version, and author. This helps the game discover and manage installed mods.</li>
+<li><strong>Data Merging/Patching</strong>: Mechanisms to merge modded configuration data with base game data, allowing mods to make small, targeted changes (patches) without replacing entire files.</li>
+<li><strong>Event System Hooks</strong>: Allowing modders to subscribe to or publish events on the game's <code>EventBus</code>, enabling them to react to or trigger game actions.</li>
+<li><strong>Component System Extensibility</strong>: Enabling modders to define and register entirely new <code>IComponent</code> types and <code>ISystem</code>s with the game's <code>World</code> (ECS), allowing them to create custom gameplay mechanics.</li>
+<li><strong>Scripting Interfaces (conceptual, covered next chapter)</strong>: Providing an API or a scripting language binding that allows modders to write custom code.</li>
+</ol>
+<h3 id="architectural-reasoning-the-open-architecture">Architectural Reasoning: The Open Architecture</h3>
+<p>Designing explicit modding entry points aligns deeply with our core architectural principles:</p>
+<ul>
+<li><strong>Modularity</strong>: Each entry point is a distinct module, clearly separated from the core game logic.</li>
+<li><strong>Composition</strong>: Modders can compose new functionality by adding new components or systems, leveraging the existing ECS framework.</li>
+<li><strong>Abstraction &amp; Interfaces</strong>: Modders interact with stable interfaces (like <code>IEventManagementSystem</code> or <code>IResourceManagementSystem</code>), meaning their mods are less likely to break if internal implementations change.</li>
+<li><strong>Data-Driven Design</strong>: The emphasis on external configuration data makes it inherently moddable, as modders can simply edit text files.</li>
+<li><strong>Version Control</strong>: Manifest files allow for versioning of mods, helping manage compatibility.</li>
+</ul>
+<h3 id="production-mindset-notes-official-support-and-community-tools">Production Mindset Notes: Official Support and Community Tools</h3>
+<p>In AAA production, supporting modding effectively often involves dedicated resources:</p>
+<ul>
+<li><strong>Modding SDK/Tools</strong>: Releasing an official Software Development Kit (SDK) or specific tools (e.g., a level editor, a data editor) can greatly accelerate and standardize mod creation.</li>
+<li><strong>Community Management</strong>: Engaging with the modding community, providing documentation, and offering support is crucial.</li>
+<li><strong>Stability vs. Flexibility</strong>: Balancing the need for a stable game API for modders with the development team's need to iterate and refactor. Major breaking changes to modding APIs should be communicated well in advance.</li>
+<li><strong>Legal Considerations</strong>: Defining clear terms of service for user-generated content, especially concerning monetization or copyrighted material.</li>
+</ul>
+<h3 id="step-by-step-instructions-implementing-key-modding-entry-points">Step-by-Step Instructions: Implementing Key Modding Entry Points</h3>
+<p>We will enhance our <code>ResourceSystem</code> and <code>ConfigManager</code> to more formally support mod loading and introduce the concept of a <code>ModManager</code>.</p>
+<p><strong>1. Create a <code>ModInfo</code> Manifest Structure:</strong></p>
+<p>Each mod will have a <code>modinfo.json</code> file describing it.</p>
+<pre><code class="language-pseudocode">// Source/Systems/Modding/ModInfo.pseudocode
+class ModInfo:
+    id: string          // Unique ID for the mod (e.g., &quot;MyAwesomeWeaponMod&quot;)
+    name: string        // Display name (e.g., &quot;My Awesome Weapon Mod&quot;)
+    version: string     // Mod version (e.g., &quot;1.0.0&quot;)
+    author: string      // Mod author
+    description: string // Short description
+
+    // List of asset paths to override/add (optional, more for discovery)
+    // For now, our ResourceSystem will handle discovery based on folder structure
+    // but this could list specific files.
+    // overrides: List&lt;string&gt; 
+
+    // List of config files to load (optional, more for discovery)
+    // config_files: List&lt;string&gt;
+
+    function ModInfo(mod_id: string, mod_name: string, mod_version: string, mod_author: string, mod_desc: string):
+        id = mod_id
+        name = mod_name
+        version = mod_version
+        author = mod_author
+        description = mod_desc
+
+    function Initialize(raw_data_string: string):
+        parsed_json = ParseJson(raw_data_string) // Reuse conceptual JSON parser
+        id = parsed_json.id
+        name = parsed_json.name
+        version = parsed_json.version
+        author = parsed_json.author
+        description = parsed_json.description
+        print(&quot;Loaded ModInfo for: &quot; + name + &quot; (ID: &quot; + id + &quot;)&quot;)
+
+// Reuse ParseJson placeholder from Chapter 9
+</code></pre>
+<p><strong>2. Implement a <code>ModManager</code> System:</strong></p>
+<p>This system will discover, load, and manage installed mods. It will feed mod paths to the <code>ResourceSystem</code>.</p>
+<pre><code class="language-pseudocode">// Source/Systems/Modding/ModManager.pseudocode
+class ModManager implements IGameSystem:
+    mod_directory: string = &quot;Mods/&quot; // Base directory for all mods
+    active_mods: Map&lt;string, ModInfo&gt; // Map&lt;ModID, ModInfo&gt;
+    resource_system: IResourceManagementSystem
+    config_manager: ConfigManager
+    event_bus: IEventManagementSystem
+
+    function ModManager(res_sys: IResourceManagementSystem, cfg_mgr: ConfigManager, bus: IEventManagementSystem):
+        resource_system = res_sys
+        config_manager = cfg_mgr
+        event_bus = bus
+        active_mods = new Map&lt;string, ModInfo&gt;()
+
+    // IGameSystem methods
+    function Initialize():
+        print(&quot;ModManager Initialized. Discovering mods...&quot;)
+        DiscoverAndLoadMods()
+        event_bus.Publish(&quot;ModsLoaded&quot;, { &quot;mod_count&quot;: active_mods.Count })
+
+    function Update(delta_time: float):
+        pass
+
+    function Shutdown():
+        print(&quot;ModManager Shutting Down.&quot;)
+        active_mods.Clear()
+
+    function DiscoverAndLoadMods():
+        // Conceptual: Get all subdirectories in the base mod_directory
+        mod_folders = FileSystem.GetSubDirectories(mod_directory) // e.g., [&quot;Mods/MyMod1/&quot;, &quot;Mods/MyMod2/&quot;]
+
+        for mod_folder_path in mod_folders:
+            mod_info_path = mod_folder_path + &quot;modinfo.json&quot;
+            if FileSystem.FileExists(mod_info_path):
+                raw_mod_info = FileSystem.ReadFile(mod_info_path)
+                mod_info = new ModInfo(&quot;temp&quot;, &quot;temp&quot;, &quot;temp&quot;, &quot;temp&quot;, &quot;temp&quot;)
+                mod_info.Initialize(raw_mod_info) // Parse the modinfo.json
+
+                if active_mods.ContainsKey(mod_info.id):
+                    print(&quot;Warning: Duplicate mod ID found: &quot; + mod_info.id + &quot;. Skipping.&quot;)
+                    continue
+
+                active_mods[mod_info.id] = mod_info
+                print(&quot;Discovered mod: &quot; + mod_info.name + &quot; (&quot; + mod_info.id + &quot;)&quot;)
+
+                // --- Add this mod's folder as a high-priority search path for resources ---
+                // The ResourceSystem's asset_search_paths should be ordered with mod paths first.
+                // We'll add this to the FRONT of the ResourceSystem's search paths list.
+                resource_system.AddSearchPath(mod_folder_path) 
+
+                // --- Load mod-specific config data ---
+                // Example: Load all .json files from mod_folder_path + &quot;Config/&quot;
+                mod_config_files = FileSystem.GetFilesInDirectory(mod_folder_path + &quot;Config/&quot;, &quot;*.json&quot;)
+                for config_file_path in mod_config_files:
+                    // Extract logical ID (e.g., &quot;Weapon_MyCustomGun&quot; from full path)
+                    logical_id = GetLogicalIDFromPath(config_file_path) // Conceptual helper
+
+                    // The ConfigManager's LoadConfig method will now use the ResourceSystem
+                    // which checks mod paths.
+                    // For now, we manually tell ConfigManager to load it from the mod path.
+                    // A better approach is to have ConfigManager use ResourceSystem directly for *all* config loading.
+
+                    // For now, we'll just demonstrate loading a specific weapon config directly from the mod path
+                    if logical_id.StartsWith(&quot;Weapon_&quot;) and config_file_path.Contains(&quot;Weapons/&quot;):
+                        data_id = logical_id.Replace(&quot;Weapon_&quot;, &quot;&quot;) // e.g. &quot;MyCustomGun&quot;
+                        config_manager.LoadConfig&lt;WeaponData&gt;(config_file_path, data_id)
+                        print(&quot;Loaded mod config: &quot; + logical_id + &quot; from &quot; + mod_info.name)
+            else:
+                print(&quot;Warning: Mod folder &quot; + mod_folder_path + &quot; found, but no modinfo.json.&quot;)
+
+    function GetActiveMods(): returns List&lt;ModInfo&gt;:
+        return active_mods.Values()
+
+    // Conceptual FileSystem helpers for ModManager
+    function FileSystem.GetSubDirectories(path: string): returns List&lt;string&gt;:
+        print(&quot;Simulating getting subdirectories of: &quot; + path)
+        // For demo, assume one mod folder exists
+        if path == &quot;Mods/&quot;:
+            return [&quot;Mods/MyAwesomeWeaponMod/&quot;]
+        return new List&lt;string&gt;()
+
+    function FileSystem.GetFilesInDirectory(path: string, filter: string): returns List&lt;string&gt;:
+        print(&quot;Simulating getting files in directory: &quot; + path + &quot; with filter: &quot; + filter)
+        if path == &quot;Mods/MyAwesomeWeaponMod/Config/Weapons/&quot; and filter == &quot;*.json&quot;:
+            return [&quot;Mods/MyAwesomeWeaponMod/Config/Weapons/Weapon_MyCustomGun.json&quot;]
+        return new List&lt;string&gt;()
+
+    function GetLogicalIDFromPath(path: string): returns string:
+        // Simple example: extract file name without extension
+        file_name = path.Split('/').Last().Split('.').First()
+        return file_name
+</code></pre>
+<p><strong>3. Enhance <code>ResourceSystem</code> for Mod Path Management:</strong></p>
+<p>Modify <code>ResourceSystem</code> to allow <code>ModManager</code> to add search paths dynamically.</p>
+<pre><code class="language-pseudocode">// Source/Systems/ResourceManagement/ResourceSystem.pseudocode (Updated)
+class ResourceSystem implements IResourceManagementSystem, IGameSystem:
+    // ... existing fields ...
+
+    function AddSearchPath(path: string):
+        // Add path to the front, giving it higher priority
+        asset_search_paths.Insert(0, path)
+        print(&quot;ResourceSystem: Added mod search path: &quot; + path)
+
+    // ... other methods ...
+</code></pre>
+<p><strong>4. Enhance <code>ConfigManager</code> to use <code>ResourceSystem</code> for File Loading:</strong></p>
+<p>This is a crucial refactor. <code>ConfigManager</code> should not directly read from <code>FileSystem</code>; it should ask <code>ResourceSystem</code> to do it, so mod overrides are automatically handled.</p>
+<pre><code class="language-pseudodecode">// Source/Systems/ConfigManagement/ConfigManager.pseudocode (Updated)
+class ConfigManager:
+    loaded_data: Map&lt;Type, Map&lt;string, IConfigData&gt;&gt;
+    resource_system: IResourceManagementSystem // New: Dependency on ResourceSystem
+
+    function ConfigManager(res_sys: IResourceManagementSystem): // Constructor takes ResourceSystem
+        loaded_data = new Map&lt;Type, Map&lt;string, IConfigData&gt;&gt;()
+        resource_system = res_sys
+
+    // Loads a single configuration file and parses it into the specified type
+    function LoadConfig&lt;T: IConfigData&gt;(config_logical_id: string, data_id: string): returns T:
+        // Now, ConfigManager asks ResourceSystem to get the raw config file content
+        // The ResourceSystem will handle path resolution and mod overrides.
+        config_handle = resource_system.LoadAsset&lt;Object&gt;(config_logical_id) // Load as generic Object
+        if config_handle is null or not config_handle.is_loaded:
+            print(&quot;Error: Config asset &quot; + config_logical_id + &quot; not found or failed to load via ResourceSystem.&quot;)
+            return null
+
+        raw_data_string = config_handle.GetAsset().content // Assume conceptual Object has a 'content' field
+        resource_system.UnloadAsset(config_handle) // Release reference after getting content
+
+        if raw_data_string is null:
+            print(&quot;Error: Raw data string is null for config: &quot; + config_logical_id)
+            return null
+
+        new_data = new T()
+        new_data.Initialize(data_id, raw_data_string)
+
+        if not loaded_data.ContainsKey(T):
+            loaded_data[T] = new Map&lt;string, IConfigData&gt;()
+        loaded_data[T][data_id] = new_data
+
+        return new_data as T
+
+    // ... GetConfig method remains the same ...
+
+    // --- Conceptual Object for raw config content ---
+    class Object: // Redefine Object to hold content
+        path: string
+        content: string
+        function Object(p: string, c: string = &quot;&quot;): path = p; content = c
+
+    // --- Update Engine.LoadAssetFromFile to return Object with content ---
+    function Engine.LoadAssetFromFile&lt;T&gt;(path: string): returns T:
+        print(&quot;Simulating engine loading asset from: &quot; + path)
+        // For config files, we need to return their content
+        if path.Contains(&quot;.json&quot;):
+            // For demo, use mock_file_system to retrieve content
+            file_content = FileSystem.ReadFile(path)
+            return new Object(path, file_content) as T
+        if T.GetType() == Model: return new Model(path) as T
+        if T.GetType() == Texture: return new Texture(path) as T
+        return new Object(path) as T // Generic object without specific content
+</code></pre>
+<ul>
+<li><strong>Note</strong>: The <code>ConfigManager.LoadConfig</code> now takes a <code>config_logical_id</code> (e.g., "Weapon_AssaultRifle_Config") instead of a direct file path. The <code>ResourceSystem</code> will map this logical ID to the actual path and handle mod overrides. We need to add these logical IDs to <code>ResourceSystem.asset_path_map</code>.</li>
+</ul>
+<p><strong>5. Update <code>ResourceSystem.Initialize</code> and <code>FileSystem.FileExists</code> for Config Logical IDs:</strong></p>
+<pre><code class="language-pseudocode">// Source/Systems/ResourceManagement/ResourceSystem.pseudocode (Updated Initialize)
+class ResourceSystem implements IResourceManagementSystem, IGameSystem:
+    // ... existing fields ...
+
+    function Initialize():
+        print(&quot;ResourceSystem Initialized.&quot;)
+        asset_search_paths.Add(&quot;Mods/&quot;) 
+        asset_search_paths.Add(&quot;Assets/&quot;) 
+
+        // Populate asset_path_map with both raw assets AND config files
+        asset_path_map[&quot;PlayerCharacterModel&quot;] = &quot;Models/Characters/M_PlayerCharacter01.fbx&quot;
+        asset_path_map[&quot;AssaultRifleModel&quot;] = &quot;Models/Weapons/AssaultRifle.fbx&quot;
+        asset_path_map[&quot;HealthPotionIcon&quot;] = &quot;UI/Icons/HealthPotion_Icon.png&quot;
+
+        // Logical IDs for config files
+        asset_path_map[&quot;Weapon_AssaultRifle_Config&quot;] = &quot;Config/Weapons/Weapon_AssaultRifle.json&quot;
+        asset_path_map[&quot;Weapon_Pistol_Config&quot;] = &quot;Config/Weapons/Weapon_Pistol.json&quot;
+        // And for our modded weapon:
+        asset_path_map[&quot;Weapon_MyCustomGun_Config&quot;] = &quot;Config/Weapons/Weapon_MyCustomGun.json&quot; // Even if it only exists in Mods/
+        print(&quot;ResourceSystem: Populated initial asset and config paths.&quot;)
+
+    // Update FileSystem.FileExists to also check mock_file_system for config content
+    function FileSystem.FileExists(path: string): returns boolean:
+        // ... existing logic for .fbx, .png ...
+        if path.Contains(&quot;Mods/Config/Weapons/Weapon_MyCustomGun.json&quot;): return true
+        if path.Contains(&quot;Config/Weapons/Weapon_AssaultRifle.json&quot;): return true
+        if path.Contains(&quot;Config/Weapons/Weapon_Pistol.json&quot;): return true
+        // Also check if it's in our mock file system (for configs written by SaveGameSystem)
+        return mock_file_system.ContainsKey(path) or (path.Contains(&quot;Assets/&quot;) or path.Contains(&quot;Mods/&quot;)) // Simplified check
+</code></pre>
+<p><strong>6. Update <code>Main</code> for ModManager and Refactored Config Loading:</strong></p>
+<pre><code class="language-pseudocode">// Source/Main.pseudocode (Updated conceptual application entry point)
+
+// ... existing global systems ...
+
+function Main():
+    print(&quot;Application starting...&quot;)
+
+    service_locator = ServiceLocator.GetInstance()
+
+    // --- 1. Initialize and Register Core Systems ---
+    input_system_impl: IInputSystem = new InputSystemImplementation()
+    event_bus_impl: IEventManagementSystem = new EventBus()
+    resource_system_impl: IResourceManagementSystem = new ResourceSystem() // Our ResourceSystem
+    ui_system_impl: IUIManagementSystem = new UISystemImplementation()
+    // ConfigManager now depends on ResourceSystem
+    config_manager_impl: ConfigManager = new ConfigManager(resource_system_impl) 
+
+    game_world = new World() 
+    game_state_manager_impl: IGameStateSystem = new GameStateManager(service_locator)
+    save_game_system_impl: IGameSystem = new SaveGameSystem(game_world, event_bus_impl)
+
+    // ModManager depends on ResourceSystem, ConfigManager, EventBus
+    mod_manager_impl: IGameSystem = new ModManager(resource_system_impl, config_manager_impl, event_bus_impl) 
+
+    service_locator.RegisterService&lt;IInputSystem&gt;(input_system_impl)
+    service_locator.RegisterService&lt;IEventManagementSystem&gt;(event_bus_impl)
+    service_locator.RegisterService&lt;IResourceManagementSystem&gt;(resource_system_impl)
+    service_locator.RegisterService&lt;IUIManagementSystem&gt;(ui_system_impl)
+    service_locator.RegisterService&lt;ConfigManager&gt;(config_manager_impl)
+    service_locator.RegisterService&lt;IGameStateSystem&gt;(game_state_manager_impl)
+    service_locator.RegisterService&lt;World&gt;(game_world)
+    service_locator.RegisterService&lt;IGameSystem&gt;(save_game_system_impl)
+    service_locator.RegisterService&lt;IGameSystem&gt;(mod_manager_impl) // Register ModManager
+
+    // --- 2. Load Configuration Data (now using the ConfigManager service, which uses ResourceSystem) ---
+    // This happens AFTER ModManager has added its paths to ResourceSystem during its Initialize()
+    // So, we need to ensure ModManager is initialized before we try to load config data.
+    // The GameLoop's Initialize call on systems will handle this order.
+    // For now, we'll manually call ModManager.Initialize() to ensure paths are added.
+    mod_manager_impl.Initialize() // Manually initialize ModManager here for demo purposes
+
+    print(&quot;\n--- Loading Core Game Configuration Data ---\n&quot;)
+    config_manager = service_locator.Get&lt;ConfigManager&gt;()
+    if config_manager is not null:
+        // Use logical IDs now, which ResourceSystem maps to paths (considering mods)
+        config_manager.LoadConfig&lt;WeaponData&gt;(&quot;Weapon_AssaultRifle_Config&quot;, &quot;AssaultRifle_01&quot;)
+        config_manager.LoadConfig&lt;WeaponData&gt;(&quot;Weapon_Pistol_Config&quot;, &quot;Pistol_01&quot;)
+        // Load the modded weapon if it exists
+        config_manager.LoadConfig&lt;WeaponData&gt;(&quot;Weapon_MyCustomGun_Config&quot;, &quot;MyCustomGun_01&quot;)
+    else:
+        print(&quot;Error: ConfigManager not available.&quot;)
+
+    // --- 3. Setup the ECS World and Systems ---
+    game_world.AddSystem(new MovementSystem())
+    game_world.AddSystem(new UIHealthDisplaySystem())
+
+    // Create ECS Entities (components now get dependencies via ServiceLocator)
+    player_entity_id = game_world.CreateEntity()
+    game_world.AddComponent(player_entity_id, new PositionComponent(0, 0, 0))
+    game_world.AddComponent(player_entity_id, new VelocityComponent(1, 0, 0))
+    game_world.AddComponent(player_entity_id, new HealthComponent(player_entity_id, 100, 100)) 
+
+    enemy_entity_id = game_world.CreateEntity()
+    game_world.AddComponent(enemy_entity_id, new PositionComponent(10, 0, 0))
+    game_world.AddComponent(enemy_entity_id, new VelocityComponent(-0.5, 0, 0))
+    game_world.AddComponent(enemy_entity_id, new HealthComponent(enemy_entity_id, 50, 50))
+
+    // --- 4. Setup Game Loop ---
+    game_loop = new GameLoop(game_world)
+
+    game_loop.RegisterSystem(service_locator.Get&lt;IInputSystem&gt;())
+    game_loop.RegisterSystem(service_locator.Get&lt;IGameStateSystem&gt;())
+    game_loop.RegisterSystem(service_locator.Get&lt;IEventManagementSystem&gt;())
+    game_loop.RegisterSystem(service_locator.Get&lt;IResourceManagementSystem&gt;())
+    game_loop.RegisterSystem(service_locator.Get&lt;IUIManagementSystem&gt;())
+    game_loop.RegisterSystem(save_game_system_impl)
+    // ModManager is already initialized, but can be registered with game loop for Update/Shutdown
+    game_loop.RegisterSystem(mod_manager_impl) 
+
+    print(&quot;\n--- Demonstrating Modded Content Access ---\n&quot;)
+    modded_weapon_data = config_manager.GetConfig&lt;WeaponData&gt;(&quot;MyCustomGun_01&quot;)
+    if modded_weapon_data is not null:
+        print(&quot;Successfully retrieved modded weapon data: &quot; + modded_weapon_data.display_name)
+        print(&quot;Modded weapon model path: &quot; + service_locator.Get&lt;IResourceManagementSystem&gt;().ResolveAssetPath(&quot;Weapon_MyCustomGun_Config&quot;))
+    else:
+        print(&quot;Modded weapon data 'MyCustomGun_01' not found.&quot;)
+
+    print(&quot;\n--- Simulating Gameplay Actions ---\n&quot;)
+    event_bus = service_locator.Get&lt;IEventManagementSystem&gt;()
+    if event_bus is not null:
+        event_bus.Publish(&quot;PlayButtonClicked&quot;)
+
+    player_health_comp = game_world.GetComponent&lt;HealthComponent&gt;(player_entity_id)
+    if player_health_comp is not null:
+        player_health_comp.TakeDamage(10)
+        player_health_comp.TakeDamage(30)
+        player_health_comp.Heal(5)
+        player_health_comp.TakeDamage(100)
+
+    print(&quot;\n--- Starting Game Loop (Conceptual) ---\n&quot;)
+    // game_loop.Run() 
+
+    print(&quot;Application finished.&quot;)
+</code></pre>
+<p><strong>7. Create Example Mod Files:</strong></p>
+<p>Create the following files in your project structure:</p>
+<ul>
+<li><code>AstroQuest_Project/Mods/MyAwesomeWeaponMod/modinfo.json</code>:
+    <code>json
+    {
+      "id": "MyAwesomeWeaponMod",
+      "name": "My Awesome Weapon Mod",
+      "version": "1.0.0",
+      "author": "ModderX",
+      "description": "Adds a super powerful custom gun."
+    }</code></li>
+<li><code>AstroQuest_Project/Mods/MyAwesomeWeaponMod/Config/Weapons/Weapon_MyCustomGun.json</code>:
+    <code>json
+    {
+      "id": "MyCustomGun_01",
+      "display_name": "ModderX Blaster",
+      "damage_per_shot": 50,
+      "fire_rate_seconds": 0.05,
+      "magazine_size": 20,
+      "reload_time_seconds": 1.0,
+      "model_path": "Mods/MyAwesomeWeaponMod/Assets/Models/Blaster.fbx",
+      "sound_fire_path": "Mods/MyAwesomeWeaponMod/Assets/Audio/Blaster_Fire.wav",
+      "sound_reload_path": "Assets/Audio/SFX/AssaultRifle_Reload.wav",
+      "icon_path": "Mods/MyAwesomeWeaponMod/Assets/UI/Blaster_Icon.png"
+    }</code></li>
+<li><code>AstroQuest_Project/Mods/MyAwesomeWeaponMod/Assets/Models/Blaster.fbx</code> (empty file)</li>
+<li><code>AstroQuest_Project/Mods/MyAwesomeWeaponMod/Assets/Audio/Blaster_Fire.wav</code> (empty file)</li>
+<li><code>AstroQuest_Project/Mods/MyAwesomeWeaponMod/Assets/UI/Blaster_Icon.png</code> (empty file)</li>
+</ul>
+<h3 id="checkpoint-exercise">Checkpoint &amp; Exercise</h3>
+<ul>
+<li><strong>Task</strong>:<ol>
+<li>Create <code>ModInfo.pseudocode</code> in <code>Source/Systems/Modding/</code>.</li>
+<li>Implement <code>ModManager.pseudocode</code> in <code>Source/Systems/Modding/</code>.</li>
+<li>Update <code>ResourceSystem.pseudocode</code> to include <code>AddSearchPath</code> and update <code>Initialize</code> to account for new config logical IDs.</li>
+<li>Refactor <code>ConfigManager.pseudocode</code> to take <code>IResourceManagementSystem</code> in its constructor and use it for all file loading.</li>
+<li>Update <code>Main.pseudocode</code> to instantiate and register <code>ModManager</code>, and to demonstrate loading a modded weapon config.</li>
+<li>Create the example mod folders and files as described in step 7.</li>
+</ol>
+</li>
+<li><strong>Reflection</strong>: You've now implemented a foundational system for discovering and loading mods, allowing modded assets and configuration data to integrate seamlessly with your game. The <code>ModManager</code> orchestrates the discovery, and the <code>ResourceSystem</code> handles the actual loading with mod priority. This is a robust framework for a moddable game.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

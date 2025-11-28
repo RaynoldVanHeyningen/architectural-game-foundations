@@ -1,0 +1,1255 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../06-chapter-6/">
+      
+      
+        <link rel="next" href="../08-chapter-8/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Chapter 7 - Architectural Foundations: Building Modular & Moddable AAA Game Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="sky" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-7-defining-core-systems-the-nervous-system-of-your-game" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects" class="md-header__button md-logo" aria-label="Architectural Foundations: Building Modular & Moddable AAA Game Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Architectural Foundations: Building Modular & Moddable AAA Game Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 7
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects" class="md-nav__button md-logo" aria-label="Architectural Foundations: Building Modular & Moddable AAA Game Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Architectural Foundations: Building Modular & Moddable AAA Game Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-chapter-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-chapter-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-chapter-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-chapter-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-chapter-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-chapter-6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-7-defining-core-systems-the-nervous-system-of-your-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 7: Defining Core Systems: The Nervous System of Your Game
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapter 7: Defining Core Systems: The Nervous System of Your Game">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-explanation-what-are-core-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concept Explanation: What are Core Systems?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-reasoning-global-orchestration-and-decoupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Reasoning: Global Orchestration and Decoupling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-mindset-notes-foundation-for-team-specialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Mindset Notes: Foundation for Team Specialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-instructions-defining-and-abstracting-core-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Instructions: Defining and Abstracting Core Systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpoint &amp; Exercise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-chapter-8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-chapter-9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 9
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-chapter-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 10
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-chapter-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 11
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-chapter-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 12
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-chapter-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 13
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-chapter-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 14
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-chapter-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 15
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-chapter-16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 16
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-chapter-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 17
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-chapter-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 18
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-chapter-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 19
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-chapter-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-7-defining-core-systems-the-nervous-system-of-your-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 7: Defining Core Systems: The Nervous System of Your Game
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapter 7: Defining Core Systems: The Nervous System of Your Game">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-explanation-what-are-core-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concept Explanation: What are Core Systems?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-reasoning-global-orchestration-and-decoupling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Reasoning: Global Orchestration and Decoupling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-mindset-notes-foundation-for-team-specialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Mindset Notes: Foundation for Team Specialization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-instructions-defining-and-abstracting-core-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Instructions: Defining and Abstracting Core Systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpoint &amp; Exercise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Chapter 7</h1>
+
+<h2 id="chapter-7-defining-core-systems-the-nervous-system-of-your-game">Chapter 7: Defining Core Systems: The Nervous System of Your Game</h2>
+<h3 id="goal">Goal</h3>
+<p>The goal of this chapter is to identify and abstract the fundamental, high-level systems that are common to most games. You will learn to think about these systems as independent, orchestrating entities that manage broad areas of functionality, laying the groundwork for their modular implementation in later chapters.</p>
+<h3 id="concept-explanation-what-are-core-systems">Concept Explanation: What are Core Systems?</h3>
+<p>Core systems are the fundamental, high-level managers or orchestrators that provide essential services to the entire game. They are the "nervous system" that coordinates and drives the various parts of your game. Unlike individual components (which define specific behaviors of an entity), core systems manage broad categories of functionality that might affect multiple entities or the game as a whole.</p>
+<p>Think of them as the executive departments of your game's government:</p>
+<ul>
+<li><strong>Input System</strong>: The Department of Player Interaction.</li>
+<li><strong>Game State System</strong>: The Department of Current Affairs (Menu, Gameplay, Pause).</li>
+<li><strong>Event Management System</strong>: The Department of Internal Communications.</li>
+<li><strong>Resource Management System</strong>: The Department of Supply Chain and Logistics.</li>
+<li><strong>UI Management System</strong>: The Department of Public Display.</li>
+</ul>
+<p>These systems are typically singletons (or accessed via a Service Locator, which we'll discuss in Chapter 12) because there's usually only one instance of an input handler or a resource loader for the entire game. Their primary responsibility is to coordinate, delegate, and provide services, not to hold specific game logic for individual objects.</p>
+<h3 id="architectural-reasoning-global-orchestration-and-decoupling">Architectural Reasoning: Global Orchestration and Decoupling</h3>
+<p>Defining core systems early is crucial for several architectural reasons:</p>
+<ul>
+<li><strong>Clear Responsibilities</strong>: Each core system has a well-defined, singular purpose. This prevents "God objects" that try to do everything, promoting the Single Responsibility Principle at a higher level.</li>
+<li><strong>Centralized Access</strong>: They provide a single, consistent point of access for common services. For example, any component needing to play a sound doesn't need to know <em>how</em> sound is played; it just asks the <code>AudioSystem</code> to play it.</li>
+<li><strong>Decoupling</strong>: By interacting with a centralized system, other parts of the game become less coupled to each other. A <code>PlayerMovementComponent</code> doesn't need to know about the <code>InputModule</code>; it simply requests input from the <code>InputSystem</code>. This allows you to swap out implementations (e.g., keyboard input vs. gamepad input) without affecting the <code>PlayerMovementComponent</code>.</li>
+<li><strong>Scalability</strong>: As your game grows, these systems can be extended to handle more complex scenarios without requiring widespread changes across the codebase. For instance, the <code>ResourceManagementSystem</code> can be expanded to handle asset bundling, asynchronous loading, or modded content.</li>
+<li><strong>Moddability Hooks</strong>: Core systems often serve as ideal "hooks" for modders. A modder might want to register a custom input action with the <code>InputSystem</code> or load a new asset via the <code>ResourceManagementSystem</code>.</li>
+</ul>
+<h3 id="production-mindset-notes-foundation-for-team-specialization">Production Mindset Notes: Foundation for Team Specialization</h3>
+<p>In a AAA studio, core systems are often developed by specialized teams or senior engineers. Defining them early facilitates this specialization:</p>
+<ul>
+<li><strong>Dedicated Ownership</strong>: A "Systems Team" might own the <code>ResourceManagementSystem</code> and <code>EventSystem</code>, ensuring they are robust and performant. Gameplay programmers then <em>use</em> these systems without needing to understand their intricate internal workings.</li>
+<li><strong>Shared Infrastructure</strong>: These systems form the common infrastructure that all other parts of the game rely upon. They need to be stable and well-tested.</li>
+<li><strong>API Design</strong>: The interfaces (APIs) of these core systems are critical. They must be intuitive, comprehensive, and stable to support all developers who will use them. Significant time is spent designing these APIs.</li>
+</ul>
+<h3 id="step-by-step-instructions-defining-and-abstracting-core-systems">Step-by-Step Instructions: Defining and Abstracting Core Systems</h3>
+<p>We will define conceptual interfaces for several common core systems. These interfaces outline <em>what</em> the system does, not <em>how</em> it does it. This abstraction is key to modularity.</p>
+<p><strong>1. Define the <code>InputSystem</code> Interface:</strong></p>
+<p>This system's responsibility is to abstract away input devices and provide a consistent way for the game to query player input.</p>
+<pre><code class="language-pseudocode">// Source/Systems/Input/IInputSystem.pseudocode
+interface IInputSystem:
+    function Initialize():
+        // Setup input mappings, device detection
+        pass
+
+    function Update():
+        // Poll input devices, process raw input
+        pass
+
+    function GetMovementAxis(): returns Vector2
+        // Returns a normalized vector representing movement direction (e.g., from WASD or left stick)
+        pass
+
+    function IsActionPressed(action_name: string): returns boolean
+        // Checks if a named action (e.g., &quot;Jump&quot;, &quot;Fire&quot;) is currently pressed
+        pass
+
+    function IsActionHeld(action_name: string): returns boolean
+        // Checks if a named action is currently held down
+        pass
+
+    function IsActionReleased(action_name: string): returns boolean
+        // Checks if a named action was just released
+        pass
+
+    function AddInputBinding(action_name: string, key_code: string):
+        // Allows runtime remapping of input actions
+        pass
+
+    function RemoveInputBinding(action_name: string, key_code: string):
+        pass
+</code></pre>
+<ul>
+<li><strong>Architectural Note</strong>: Any component needing input will ask <code>IInputSystem</code>, not directly check keyboard keys. This allows easy remapping or swapping input types (keyboard, gamepad, touch).</li>
+</ul>
+<p><strong>2. Define the <code>GameStateSystem</code> Interface:</strong></p>
+<p>This system manages the overall flow of the game, transitioning between different high-level states (e.g., Main Menu, Loading, Gameplay, Pause, Game Over).</p>
+<pre><code class="language-pseudocode">// Source/Systems/GameStates/IGameStateSystem.pseudocode
+interface IGameStateSystem:
+    function Initialize():
+        // Setup initial game state
+        pass
+
+    function Update(delta_time: float):
+        // Update current game state logic
+        pass
+
+    function TransitionToState(new_state_id: string):
+        // Request a transition to a new game state
+        pass
+
+    function GetCurrentStateID(): returns string
+        // Returns the ID of the current active state
+        pass
+
+    function RegisterState(state_id: string, state_object: IGameState):
+        // Allows registering different game state implementations
+        pass
+</code></pre>
+<ul>
+<li><strong>Architectural Note</strong>: This centralizes state management, preventing individual game objects from making ad-hoc state changes and ensuring a consistent game flow.</li>
+</ul>
+<p><strong>3. Define the <code>EventManagementSystem</code> Interface:</strong></p>
+<p>This system facilitates communication between loosely coupled modules and systems without them needing direct references to each other. We will build a full implementation later.</p>
+<pre><code class="language-pseudocode">// Source/Systems/EventManagement/IEventManagementSystem.pseudocode
+// (We will expand on this significantly in Chapter 11)
+interface IEventManagementSystem:
+    function Initialize():
+        pass
+
+    function Subscribe(event_type: string, listener_function: Function):
+        // Register a function to be called when an event of event_type is published
+        pass
+
+    function Unsubscribe(event_type: string, listener_function: Function):
+        // Remove a listener
+        pass
+
+    function Publish(event_type: string, event_data: any):
+        // Broadcast an event with associated data
+        pass
+</code></pre>
+<ul>
+<li><strong>Architectural Note</strong>: This is critical for decoupling. A <code>HealthComponent</code> can publish a "PlayerDied" event, and a <code>UISystem</code> can subscribe to it to display a "Game Over" screen, without <code>HealthComponent</code> knowing anything about <code>UISystem</code>.</li>
+</ul>
+<p><strong>4. Define the <code>ResourceManagementSystem</code> Interface:</strong></p>
+<p>This system handles loading, unloading, and managing game assets (models, textures, audio, configuration data). It should abstract away the underlying file system or asset bundle mechanism.</p>
+<pre><code class="language-pseudocode">// Source/Systems/ResourceManagement/IResourceManagementSystem.pseudocode
+interface IResourceManagementSystem:
+    function Initialize():
+        // Setup asset paths, mod directories, caching
+        pass
+
+    function LoadAsset&lt;T&gt;(asset_path: string): returns T
+        // Synchronously load an asset of a specific type
+        pass
+
+    function LoadAssetAsync&lt;T&gt;(asset_path: string, callback: Function):
+        // Asynchronously load an asset, calling a callback upon completion
+        pass
+
+    function UnloadAsset(asset_path: string):
+        // Release an asset from memory
+        pass
+
+    function GetAssetPath(logical_id: string): returns string
+        // Translate a logical ID (e.g., &quot;PlayerWeapon01&quot;) to a physical file path,
+        // considering mod overrides
+        pass
+</code></pre>
+<ul>
+<li><strong>Architectural Note</strong>: This system is central to moddability. It's where the logic for checking <code>Mods</code> folders for overrides or new content resides.</li>
+</ul>
+<p><strong>5. Define the <code>UIManagementSystem</code> Interface:</strong></p>
+<p>This system is responsible for managing all aspects of the user interface, including displaying, hiding, and updating UI elements.</p>
+<pre><code class="language-pseudocode">// Source/Systems/UI/IUIManagementSystem.pseudocode
+interface IUIManagementSystem:
+    function Initialize():
+        // Setup base UI canvases, load common UI elements
+        pass
+
+    function ShowPanel(panel_id: string, data: any = null):
+        // Display a specific UI panel (e.g., &quot;InventoryScreen&quot;, &quot;OptionsMenu&quot;)
+        pass
+
+    function HidePanel(panel_id: string):
+        // Hide a UI panel
+        pass
+
+    function TogglePanel(panel_id: string, data: any = null):
+        // Toggle visibility of a UI panel
+        pass
+
+    function UpdateHUD(player_health: integer, score: integer):
+        // Update common HUD elements (could also be event-driven)
+        pass
+</code></pre>
+<ul>
+<li><strong>Architectural Note</strong>: Centralizing UI management prevents scattered UI logic across many game objects and makes it easier to manage UI layers, transitions, and input focus.</li>
+</ul>
+<h3 id="checkpoint-exercise">Checkpoint &amp; Exercise</h3>
+<ul>
+<li><strong>Task</strong>: In your <code>AstroQuest_Project/Source/Systems/</code> directory, create subfolders for <code>Input</code>, <code>GameStates</code>, <code>EventManagement</code>, <code>ResourceManagement</code>, and <code>UI</code>. Inside each, create a file named <code>I[SystemName]System.pseudocode</code> and copy the corresponding interface definition into it.</li>
+<li><strong>Reflection</strong>: As you create these empty interfaces, consider how each one defines a clear contract. Any part of the game that needs, for example, input, will interact <em>only</em> with <code>IInputSystem</code>, not knowing or caring about its internal implementation. This is the power of abstraction and modularity in action.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1292 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../05-chapter-5/">
+      
+      
+        <link rel="next" href="../07-chapter-7/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Chapter 6 - Architectural Foundations: Building Modular & Moddable AAA Game Projects</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="sky" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-6-setting-up-your-project-structure-a-clean-slate" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects" class="md-header__button md-logo" aria-label="Architectural Foundations: Building Modular & Moddable AAA Game Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Architectural Foundations: Building Modular & Moddable AAA Game Projects
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 6
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Architectural Foundations: Building Modular &amp; Moddable AAA Game Projects" class="md-nav__button md-logo" aria-label="Architectural Foundations: Building Modular & Moddable AAA Game Projects" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Architectural Foundations: Building Modular & Moddable AAA Game Projects
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-chapter-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-chapter-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-chapter-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-chapter-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-chapter-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 6
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-6-setting-up-your-project-structure-a-clean-slate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 6: Setting Up Your Project Structure: A Clean Slate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapter 6: Setting Up Your Project Structure: A Clean Slate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-explanation-why-project-structure-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concept Explanation: Why Project Structure Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-reasoning-reflecting-modularity-on-disk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Reasoning: Reflecting Modularity on Disk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-mindset-notes-standardization-and-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Mindset Notes: Standardization and Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-instructions-establishing-a-core-project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Instructions: Establishing a Core Project Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpoint &amp; Exercise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-chapter-7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 7
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-chapter-8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 8
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-chapter-9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 9
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-chapter-10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 10
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-chapter-11/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 11
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-chapter-12/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 12
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-chapter-13/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 13
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-chapter-14/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 14
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-chapter-15/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 15
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16-chapter-16/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 16
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17-chapter-17/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 17
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18-chapter-18/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 18
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19-chapter-19/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 19
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20-chapter-20/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 20
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#chapter-6-setting-up-your-project-structure-a-clean-slate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapter 6: Setting Up Your Project Structure: A Clean Slate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapter 6: Setting Up Your Project Structure: A Clean Slate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concept-explanation-why-project-structure-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Concept Explanation: Why Project Structure Matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architectural-reasoning-reflecting-modularity-on-disk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architectural Reasoning: Reflecting Modularity on Disk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-mindset-notes-standardization-and-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Mindset Notes: Standardization and Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-instructions-establishing-a-core-project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step-by-Step Instructions: Establishing a Core Project Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkpoint-exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checkpoint &amp; Exercise
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Chapter 6</h1>
+
+<h2 id="chapter-6-setting-up-your-project-structure-a-clean-slate">Chapter 6: Setting Up Your Project Structure: A Clean Slate</h2>
+<h3 id="goal">Goal</h3>
+<p>The goal of this chapter is to establish a logical, scalable, and maintainable folder and file organization for a new game project. You will learn best practices for structuring your project directories, defining core folders, and implementing consistent naming conventions that support a large team and long-term development, laying the groundwork for moddability.</p>
+<h3 id="concept-explanation-why-project-structure-matters">Concept Explanation: Why Project Structure Matters</h3>
+<p>A well-organized project structure is the silent hero of game development. It's the first tangible manifestation of your project's foundation. Just as a tidy office improves productivity, a clean project structure:</p>
+<ul>
+<li><strong>Improves Discoverability</strong>: Developers, artists, and designers can quickly find the files they need without wasting time searching.</li>
+<li><strong>Facilitates Collaboration</strong>: Reduces merge conflicts and makes it clear where different types of assets and code should reside, preventing "wild west" file placement.</li>
+<li><strong>Enhances Maintainability</strong>: Makes it easier to understand the project's layout, onboard new team members, and navigate the codebase years down the line.</li>
+<li><strong>Supports Scalability</strong>: A structure designed for growth can accommodate thousands of assets and hundreds of code files without becoming unwieldy.</li>
+<li><strong>Enables Moddability</strong>: A predictable and logical structure makes it easier for modders to identify where to place their custom content or override existing assets.</li>
+</ul>
+<p>The core principle here is <strong>separation of concerns at the file system level</strong>. Different types of content (code, art, audio, config) belong in different, clearly defined places.</p>
+<h3 id="architectural-reasoning-reflecting-modularity-on-disk">Architectural Reasoning: Reflecting Modularity on Disk</h3>
+<p>Your physical project structure should mirror your architectural principles of modularity and separation of concerns.</p>
+<ul>
+<li><strong>Logical Grouping</strong>: Files are grouped by their <em>type</em> (e.g., all code in one place, all textures in another) and then often by their <em>function</em> or <em>game area</em> within those types (e.g., <code>Player</code> code, <code>Enemy</code> code, <code>UI</code> textures).</li>
+<li><strong>Clear Ownership</strong>: Specific directories can imply ownership or responsibility. A <code>Source/Gameplay/Player</code> folder clearly indicates where player-related code lives.</li>
+<li><strong>Minimizing Dependencies</strong>: Just as code modules should be loosely coupled, so too should file system dependencies. A change in an <code>Audio</code> folder shouldn't typically require changes in a <code>Code</code> folder, beyond perhaps updating a path in a config file.</li>
+<li><strong>Moddability Hooks</strong>: By having clear <code>Config</code> and <code>Assets</code> directories, you naturally create points where modders can inject their own data and assets, especially if your game's asset loader is designed to prioritize files from a designated "Mods" folder.</li>
+</ul>
+<h3 id="production-mindset-notes-standardization-and-automation">Production Mindset Notes: Standardization and Automation</h3>
+<p>In AAA production, project structure isn't just a suggestion; it's a strict standard enforced by tools and team discipline.</p>
+<ul>
+<li><strong>Automated Tooling</strong>: Build processes (e.g., asset pipelines, build scripts) often rely on a consistent folder structure. If an artist puts a texture in the wrong place, the build might fail or the texture won't be packed correctly.</li>
+<li><strong>Onboarding</strong>: New hires learn the project layout quickly, accelerating their ramp-up time.</li>
+<li><strong>Consistency is Key</strong>: Once a structure is decided, stick to it. Avoid creating ad-hoc folders or deviating from naming conventions. Tools like linters and internal review processes can help enforce this.</li>
+<li><strong>Version Control Integration</strong>: A clean structure works seamlessly with version control systems, reducing the scope of changes and making merge operations more manageable.</li>
+</ul>
+<h3 id="step-by-step-instructions-establishing-a-core-project-structure">Step-by-Step Instructions: Establishing a Core Project Structure</h3>
+<p>We'll outline a common, robust project structure. Remember, the exact names might vary slightly based on engine or team preference, but the <em>principles</em> remain constant.</p>
+<p><strong>1. Create the Root Project Directory:</strong></p>
+<p>Start with a single, top-level folder for your entire game project.
+*   <strong>Naming Convention</strong>: Use <code>GameName_Project</code> or <code>GameName</code> (e.g., <code>AstroQuest_Project</code>).</p>
+<pre><code>./AstroQuest_Project/
+</code></pre>
+<p><strong>2. Establish Top-Level Core Directories:</strong></p>
+<p>Inside your root directory, create these fundamental folders. These are broad categories for different types of project content.</p>
+<ul>
+<li><code>./AstroQuest_Project/</code><ul>
+<li><code>Source/</code>: All source code (C#, C++, GDScript, Pseudocode implementations).</li>
+<li><code>Assets/</code>: All game assets (textures, models, audio, animations, prefabs, materials).</li>
+<li><code>Config/</code>: All game configuration data (JSON, XML, CSV, YAML files for balance, settings, definitions).</li>
+<li><code>Docs/</code>: Design documents, technical specifications, READMEs, onboarding guides.</li>
+<li><code>Tools/</code>: Custom editor tools, external scripts, build tools specific to your project.</li>
+<li><code>Builds/</code>: Where compiled game builds will be outputted.</li>
+<li><code>ThirdParty/</code>: External libraries, SDKs, or assets from third-party vendors.</li>
+<li><code>Tests/</code>: Automated test scripts (unit tests, integration tests).</li>
+<li><code>Mods/</code>: (Optional, but highly recommended for moddability) A designated folder for user-generated content, mirroring the <code>Assets</code> and <code>Config</code> structure for overrides.</li>
+</ul>
+</li>
+</ul>
+<pre><code>./AstroQuest_Project/
+├── Source/
+├── Assets/
+├── Config/
+├── Docs/
+├── Tools/
+├── Builds/
+├── ThirdParty/
+├── Tests/
+└── Mods/ (Optional, but good for moddability)
+</code></pre>
+<p><strong>3. Structure the <code>Source/</code> Directory:</strong></p>
+<p>The <code>Source</code> folder should contain all your game's executable logic. Organize it by core systems or feature areas.</p>
+<ul>
+<li><code>./AstroQuest_Project/Source/</code><ul>
+<li><code>Core/</code>: Fundamental engine-agnostic utilities, helper classes, interfaces, base components.<ul>
+<li><code>Core/Interfaces/</code></li>
+<li><code>Core/Utilities/</code></li>
+<li><code>Core/Events/</code> (Our event system from Chapter 11)</li>
+</ul>
+</li>
+<li><code>Gameplay/</code>: Game-specific logic, organized by major game systems or entities.<ul>
+<li><code>Gameplay/Player/</code> (Player-specific components, logic)</li>
+<li><code>Gameplay/Enemies/</code> (Enemy AI, components)</li>
+<li><code>Gameplay/Weapons/</code> (Weapon logic, components)</li>
+<li><code>Gameplay/Abilities/</code></li>
+<li><code>Gameplay/World/</code> (Level generation, environmental interactions)</li>
+</ul>
+</li>
+<li><code>Systems/</code>: Global, manager-like systems that orchestrate other modules.<ul>
+<li><code>Systems/Input/</code> (Input handling system)</li>
+<li><code>Systems/GameStates/</code> (Game state machine)</li>
+<li><code>Systems/ResourceManagement/</code> (Asset loading)</li>
+<li><code>Systems/UI/</code> (UI element managers)</li>
+</ul>
+</li>
+<li><code>Editor/</code> (If applicable): Code for custom editor extensions or tools.</li>
+</ul>
+</li>
+</ul>
+<pre><code>./AstroQuest_Project/
+└── Source/
+    ├── Core/
+    │   ├── Interfaces/
+    │   ├── Utilities/
+    │   └── Events/
+    ├── Gameplay/
+    │   ├── Player/
+    │   ├── Enemies/
+    │   ├── Weapons/
+    │   ├── Abilities/
+    │   └── World/
+    ├── Systems/
+    │   ├── Input/
+    │   ├── GameStates/
+    │   ├── ResourceManagement/
+    │   └── UI/
+    └── Editor/
+</code></pre>
+<p><strong>4. Structure the <code>Assets/</code> Directory:</strong></p>
+<p>This is where all your raw and processed game assets reside. Organize primarily by asset type, then optionally by function or game area.</p>
+<ul>
+<li><code>./AstroQuest_Project/Assets/</code><ul>
+<li><code>Audio/</code><ul>
+<li><code>Audio/Music/</code></li>
+<li><code>Audio/SFX/</code></li>
+<li><code>Audio/Voice/</code></li>
+</ul>
+</li>
+<li><code>Models/</code><ul>
+<li><code>Models/Characters/</code></li>
+<li><code>Models/Environments/</code></li>
+<li><code>Models/Props/</code></li>
+<li><code>Models/Weapons/</code></li>
+</ul>
+</li>
+<li><code>Textures/</code><ul>
+<li><code>Textures/Characters/</code></li>
+<li><code>Textures/Environments/</code></li>
+<li><code>Textures/UI/</code></li>
+</ul>
+</li>
+<li><code>Animations/</code></li>
+<li><code>Materials/</code></li>
+<li><code>Prefabs/</code> (Pre-configured game objects/entities)</li>
+<li><code>UI/</code><ul>
+<li><code>UI/Fonts/</code></li>
+<li><code>UI/Layouts/</code></li>
+<li><code>UI/Icons/</code></li>
+</ul>
+</li>
+<li><code>Levels/</code> (Scene files, level data)</li>
+<li><code>VFX/</code> (Visual effects)</li>
+</ul>
+</li>
+</ul>
+<pre><code>./AstroQuest_Project/
+└── Assets/
+    ├── Audio/
+    │   ├── Music/
+    │   ├── SFX/
+    │   └── Voice/
+    ├── Models/
+    │   ├── Characters/
+    │   ├── Environments/
+    │   ├── Props/
+    │   └── Weapons/
+    ├── Textures/
+    │   ├── Characters/
+    │   ├── Environments/
+    │   └── UI/
+    ├── Animations/
+    ├── Materials/
+    ├── Prefabs/
+    ├── UI/
+    │   ├── Fonts/
+    │   ├── Layouts/
+    │   └── Icons/
+    ├── Levels/
+    └── VFX/
+</code></pre>
+<p><strong>5. Structure the <code>Config/</code> Directory:</strong></p>
+<p>This is crucial for data-driven design and moddability. Organize by the type of data.</p>
+<ul>
+<li><code>./AstroQuest_Project/Config/</code><ul>
+<li><code>GameSettings/</code> (Global game parameters, difficulty settings)</li>
+<li><code>Items/</code> (Definitions for all in-game items)</li>
+<li><code>Weapons/</code> (Definitions for all weapons)</li>
+<li><code>Characters/</code> (Base stats for players, enemies, NPCs)</li>
+<li><code>Quests/</code> (Quest definitions, objectives)</li>
+<li><code>UI/</code> (UI element properties, text strings for localization)</li>
+<li><code>Levels/</code> (Specific level configuration, spawn points)</li>
+</ul>
+</li>
+</ul>
+<pre><code>./AstroQuest_Project/
+└── Config/
+    ├── GameSettings/
+    ├── Items/
+    ├── Weapons/
+    ├── Characters/
+    ├── Quests/
+    ├── UI/
+    └── Levels/
+</code></pre>
+<p><strong>6. Naming Conventions (Crucial for Consistency):</strong></p>
+<p>Beyond folder structure, consistent file and asset naming is vital.</p>
+<ul>
+<li><strong>General Rule</strong>: Be descriptive, consistent, and avoid spaces. Use <code>PascalCase</code> or <code>snake_case</code> consistently.</li>
+<li><strong>Code Files</strong>: <code>ClassName.pseudocode</code> (e.g., <code>PlayerMovementComponent.pseudocode</code>).</li>
+<li><strong>Assets</strong>: Include type prefix/suffix (e.g., <code>T_PlayerSkin01</code> for Texture, <code>M_AssaultRifle</code> for Model, <code>A_JumpSFX</code> for Audio, <code>P_Explosion</code> for Prefab).</li>
+<li><strong>Config Files</strong>: <code>Weapon_AssaultRifle.json</code>, <code>Item_HealthPotion.xml</code>.</li>
+</ul>
+<p><strong>Example of a complete path:</strong></p>
+<p><code>./AstroQuest_Project/Source/Gameplay/Player/PlayerMovementComponent.pseudocode</code>
+<code>./AstroQuest_Project/Assets/Models/Characters/M_PlayerCharacter01.fbx</code>
+<code>./AstroQuest_Project/Assets/Textures/Characters/T_PlayerCharacter01_Diffuse.png</code>
+<code>./AstroQuest_Project/Config/Weapons/Weapon_AssaultRifle.json</code>
+<code>./AstroQuest_Project/Mods/MyWeaponMod/Config/Weapons/Weapon_AssaultRifle.json</code> (Override)</p>
+<h3 id="checkpoint-exercise">Checkpoint &amp; Exercise</h3>
+<ul>
+<li><strong>Task</strong>: Create a new empty directory on your computer. Inside it, replicate the top-level directory structure outlined above (<code>Source</code>, <code>Assets</code>, <code>Config</code>, <code>Docs</code>, etc.).</li>
+<li><strong>Reflection</strong>: Consider how this structure immediately provides clarity on where different parts of your game would reside, even before writing any code or creating any assets. Think about how a new team member would navigate this structure compared to a chaotic, unorganized one.</li>
+</ul>
+<p>This disciplined approach to project structure is your first practical step in building a professional, maintainable, and moddable game project.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
